@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+
+    <string name="app_name">PDA</string>
+    <!-- Handler Cases -->
+    <string name="no_conn">无网络连接</string>
+    <string name="prepare_query_error">查询准备失败</string>
+    <string name="empty_result">没有数据</string>
+    <string name="prepare_update_fail">更新准备失败</string>
+    <string name="update_success">更新成功</string>
+    <string name="socket_conn_fail">Socket连接失败</string>
+    <string name="connection_fail">连接网络失败</string>
+    <string name="shake_1_fail">握手1失败</string>
+    <string name="shake_2_fail">握手2失败</string>
+    <string name="shake_3_fail">握手3失败</string>
+    <string name="shake_4_fail">握手4失败</string>
+    <string name="login_fail">登录失败</string>
+    <string name="seller_nick_user_name_or_password_invalid">卖家账号，用户名或密码错误</string>
+    <string name="prepare_get_user_id_fail">准备查询UserId失败</string>
+    <string name="login_fail_for_user_id">无法得到UserId，登录失败</string>
+    <string name="get_user_id_fail">查询UserId失败</string>
+    <string name="prepare_get_accounts_fail">准备查询付款账户失败</string>
+    <string name="login_fail_for_accounts">无法得到付款账户，登录失败</string>
+    <string name="get_accounts_fail">查询付款账户失败</string>
+    <string name="update_fail_no_conn">没有网络，无法更新应用</string>
+    <!-- LoginActivity -->
+    <string name="please_wait">请稍等</string>
+    <string name="login">登录</string>
+    <string name="login_seller_nick_needed">请输入卖家昵称</string>
+    <string name="login_user_name_needed">请输入用户名</string>
+    <string name="login_password_needed">请输入密码</string>
+    <string name="seller_nick">卖家账号：</string>
+    <string name="user_name">用户名：</string>
+    <string name="password">密码：</string>
+    <string name="memorize_password">记住密码</string>
+    <string name="auto_login">自动登录</string>
+    <!-- SelectWarehouseActivity -->
+    <string name="select_warehouse">选择仓库</string>
+    <string name="check_quit">确定退出程序吗？</string>
+    <string name="query_warehouse_fail">查询仓库失败</string>
+    <string name="no_warehouse">没有仓库</string>
+    <!-- MainActivity -->
+    <string name="function_list">功能列表</string>
+    <string name="pd">盘点</string>
+    <string name="fast_pd">快速盘点</string>
+    <string name="query_goods">货品查询</string>
+    <string name="fast_in_examine_goods">到货结算</string>
+    <string name="out_examine_goods">出库验货</string>
+    <string name="pick_goods">拣货 </string>
+    <string name="settings">设置</string>
+
+    <string-array name="titles">
+        <item>@string/fast_pd</item>
+        <item>@string/query_goods</item>
+        <item>@string/fast_in_examine_goods</item>
+        <item>@string/pick_goods</item>
+        <item>@string/out_examine_goods</item>
+        <item>@string/cash_sale</item>
+    </string-array>
+    <!-- PdEntriesActivity -->
+    <string name="select_pd_entries">选择盘点单</string>
+    <string name="get_pd_entries_fail">获取盘点单列表失败</string>
+    <!-- PdDetailsActivity -->
+    <string name="pd_entering">盘点录入</string>
+    <string name="slash"> / </string>
+    <string name="scan_barcode">扫描条码</string>
+    <string name="filter">筛选</string>
+    <string name="submit_pd">提交盘点</string>
+    <string name="update_pdd">更新盘点单</string>
+    <string name="updating_pdd">盘点单更新中</string>
+    <string name="select_account">选择账户：</string>
+    <string name="all_goods">所有货品</string>
+    <string name="pd_completed">完成盘点</string>
+    <string name="pd_part">部分盘点</string>
+    <string name="pd_empty">未盘点</string>
+    <string name="pd_submit_success">盘点提交成功</string>
+    <string name="pd_submit_fail">盘点提交失败</string>
+    <string name="get_pdd_fail">获取盘点详情失败</string>
+
+    <string-array name="filters">
+        <item>@string/all_goods</item>
+        <item>@string/pd_completed</item>
+        <item>@string/pd_part</item>
+        <item>@string/pd_empty</item>
+    </string-array>
+
+    <!-- PdActivity -->
+    <string name="stock_old">当前库存量：</string>
+    <!-- FastPdActivity -->
+    <string name="spec_barcode">商家编码：</string>
+    <string name="goods_number">货品编号：</string>
+    <string name="goods_name">货品名称：</string>
+    <string name="barcode">条码：</string>
+    <string name="spec_code">规格码：</string>
+    <string name="spec_name">规格名称：</string>
+    <string name="positon_name">货位：</string>
+    <string name="stock">当前库存量：</string>
+    <string name="account">付款账户：</string>
+    <string name="stock_pd">盘点量：</string>
+    <string name="stock_can_not_be_empty">盘点量不能为空</string>
+    <string name="stock_must_be_int">盘点量必需为整数</string>
+    <string name="back_to_list">返回列表</string>
+    <string name="fast_pd_success">快速盘点成功</string>
+    <string name="fast_pd_fail">快速盘点失败</string>
+    <string name="back">返回</string>
+    <string name="scan_goods_prompt">请上方扫码按钮扫描货品条码</string>
+    <string name="query_specs_failed">查询宝贝失败</string>
+    <string name="query_no_result_promt">没有找到该宝贝</string>
+    <!-- StockTransferActivity -->
+    <string name="out_positon_names">调出货位：</string>
+    <string name="in_positon_names">调入货位：</string>
+    <string name="in_out_stock">调拨库存量：</string>
+    <string name="new_position">添加货位</string>
+    <string name="stock_transfer_empty">调拨库存为空</string>
+    <string name="same_position_error">调出货位不能与调入货位相同</string>
+    <string name="stock_tranfer_success">货位调拨成功</string>
+    <string name="stock_tranfer_fail">货位调拨失败</string>
+    <!-- NewPositionActivity -->
+    <string name="search_position">查找货位</string>
+    <string name="_new">添加</string>
+    <string name="confirm_new_position">确定添加新货位吗？</string>
+    <string name="no_such_position">无此货位</string>
+    <string name="please_enter_position">请输入货位</string>
+    <string name="stock_transfer">货位调拨</string>
+    <string name="new_position_fail">添加货位失败</string>
+    <!-- Setting -->
+    <string name="confirm_logout">确认退出账户？</string>
+    <string name="logout">退出账户</string>
+    <string name="app_version_name">1.0.2</string>
+    <string name="version_prompt">current version: v%1s</string>
+    <!-- SyncPositionsService -->
+    <string name="query_positions_fail">获取货位失败</string>
+    <string name="network_interruption">网络中断</string>
+    <!-- FastInExamineGoodsPrepareActivity -->
+    <string name="in_examine_goods_setting_for_this_time">对于本次到货入库进行设置：</string>
+    <string name="supplier">供应商：</string>
+    <string name="in_warehouse">入库仓库：</string>
+    <string name="do_price">执行价格：</string>
+    <string name="query_suppliers_fail">查询供应商失败</string>
+    <string name="supply_price">进货价</string>
+    <string name="retail_price">零售价</string>
+    <string name="wholesale_price">批发价</string>
+    <string name="member_price">会员价</string>
+    <string name="purchase_price">市场价</string>
+    <string name="quantity">数量：</string>
+    <string name="unit_price">单价：</string>
+    <string name="discount">折扣：</string>
+    <string name="money">金额：</string>
+
+    <string-array name="prices">
+        <item>@string/supply_price</item>
+        <item>@string/retail_price</item>
+        <item>@string/wholesale_price</item>
+        <item>@string/member_price</item>
+        <item>@string/purchase_price</item>
+    </string-array>
+
+    <!-- FastInExamineGoodsActivity -->
+    <string name="query_price_fail">查询价格失败</string>
+    <string name="info">信息</string>
+    <string name="submit">提交</string>
+
+    <!-- SubmitInExamineGoodsActivity -->
+    <string name="select_logistics_com">货运公司：</string>
+    <string name="other_fee">其他费用：</string>
+    <string name="cash_fee">现付金额：</string>
+    <string name="postage_fee">运费：</string>
+    <string name="logistic_number">物流单号：</string>
+    <string name="goods_total">货款合计：</string>
+    <string name="all_total">合计应付：</string>
+    <string name="money_on_credit">挂账金额：</string>
+    <string name="query_logistics_fail">查询物流失败</string>
+    <string name="add">添加</string>
+    <string name="please_reenter_goods_count">请重新输入货品数量</string>
+
+    <!-- FastExamineGoodsListActivity -->
+    <string name="num">（数）</string>
+    <string name="unit_price_2">（单价）</string>
+    <string name="discount_2">（折扣）</string>
+    <string name="multiply"> * </string>
+    <string name="equals"> = </string>
+    <string name="no_entry_prompt">暂无货品记录，请点击上方扫码按钮扫描条码添加货品</string>
+    <string name="delete">删除</string>
+    <string name="total">总数：</string>
+
+    <!-- FastInExamineGoodsSubmitAcitivty -->
+    <string name="submit_success">提交成功</string>
+    <string name="submit_fail">提交失败</string>
+
+    <!-- OutExamineGoodsActivity -->
+    <string name="select_picker">选择拣货员：</string>
+    <string name="work_number">工号：</string>
+    <string name="count_check">校验量：</string>
+    <string name="spec">规格：</string>
+    <string name="do_stock_out">确认出库</string>
+    <string name="picking_has_error">拣货出错</string>
+    <string name="picking_complete">完成拣货</string>
+    <string name="picking_part">部分拣货</string>
+    <string name="no_picking">未拣货</string>
+    <string name="scan_trade_or_logistics_prompt">请按住右侧功能按钮扫描订单号或物流单号条码</string>
+    
+    <!-- PickGoodsActivity -->
+	<string name="pick_count">拣货量</string>
+
+    <string-array name="filters_out_exam">
+        <item >@string/all_goods</item>
+        <item >@string/picking_complete</item>
+        <item >@string/picking_part</item>
+        <item >@string/no_picking</item>
+    </string-array>
+    
+    <!-- CashSaleSetActivity -->
+    <string name="search_customer_info">查找客户信息</string>
+    <string name="do_not_record_customer">不记录客户信息</string>
+    <string name="customer_nick_name">客户ID：</string>
+    <string name="customer_name">客户姓名：</string>
+    <string name="telephone">电话：</string>
+    <string name="nick_name">网名：</string>
+    <string name="zip_code">邮编：</string>
+    <string name="province">省：</string>
+    <string name="city">市：</string>
+    <string name="district">县或区：</string>
+    <string name="address">地址：</string>
+    <string name="email">电子邮件：</string>
+    <string name="please_select">请选择</string>
+    <string name="to_district_address">区域地址：</string>
+    <string name="street_address">街道地址：</string>
+    <string name="click_to_select">点击选择</string>
+    <string name="default_shop">默认店铺</string>
+    <string name="default_price">默认价格</string>
+    <string name="customer_field_empty_toast">客户的姓名、电话、网名均不能为空</string>
+    
+    <!-- CashSaleListActivity -->
+    <string name="clear_order">清空订单</string>
+    <string name="scan_barcode_2">扫码</string>
+
+    <!-- CashSaleActivity -->
+    <string name="basic_infomation">基本信息</string>
+    <string name="located_shop">所在店铺: </string>
+    <string name="warehouse">仓库: </string>
+    <string name="cash_sale">订单</string>
+    <string name="discount_sum">打折减免: </string>
+    <string name="extra_discount">优惠金额: </string>
+    <string name="change_money">找零金额: </string>
+    <string name="goods_total_2">货款总计: </string>
+    <string name="all_should_pay">合计应收: </string>
+    <string name="stock_can_order">可订购量：</string>
+    
+    <!-- CashSaleSubmit -->
+    <string name="remark">备注：</string>
+    
+    <!-- SearchCustomerActivity -->
+    <string name="enter_search_term">关键字(网名、姓名、电话)</string>
+    <string name="search">搜索</string>
+    
+    <!-- SearchGoodsActivity -->
+    <string name="enter_search_term_goods">输入货品名称或编号</string>
+</resources>

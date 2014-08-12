@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+	
+	<LinearLayout 
+		android:gravity="center"
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent"
+		android:orientation="vertical">
+			
+	    <RelativeLayout
+	        android:id="@+id/title_bar"
+	        style="@style/MyTitleBar">
+			
+	        <TextView
+	            android:id="@+id/left_btn"
+	            style="@style/MyBackButton"
+	            android:layout_marginLeft="10dp" />
+	        
+	        <TextView
+	            android:id="@+id/title_text"
+	            style="@style/MyTitleText"
+	            android:text="立即购买" />
+			
+	        <TextView
+	            android:id="@+id/right_btn"
+	            style="@style/MyBackButton"
+	            android:layout_marginRight="10.0dp" />
+	    </RelativeLayout>
+	    
+		<WebView android:id="@+id/webview" 
+		    android:layout_width="fill_parent"
+			android:layout_height="fill_parent" 
+			android:layout_weight="1">
+			<requestFocus />
+		</WebView>
+	</LinearLayout>
+	
+	<LinearLayout 
+	    android:id="@+id/service_progressbar"
+		android:background="#88000000" 
+		android:gravity="center"
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent"
+		android:orientation="horizontal" 
+		android:visibility="gone">
+		<ProgressBar android:id="@+id/about_dialog_webview_progress"
+			android:layout_margin="8sp" 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:progress="0"
+			android:max="100" android:layout_gravity="center_vertical"
+			android:indeterminateDrawable="@drawable/wait_bar" />
+		<TextView android:layout_width="wrap_content"
+			android:layout_gravity="center_vertical" 
+			android:layout_marginLeft="18sp"
+			android:textColor="@android:color/white" 
+			android:layout_height="wrap_content"
+			android:text="读取中..." />
+	</LinearLayout>
+	
+</merge>

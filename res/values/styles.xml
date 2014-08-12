@@ -1,0 +1,146 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <style name="CustomWindowTitleBackground">
+        <item name="android:background">#FFD700</item>
+    </style>
+
+    <style name="title" mce_bogus="1" parent="android:Theme">
+        <item name="android:windowTitleSize">40dip</item>
+        <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
+    </style>
+
+    <style name="RefreshButton">
+        <item name="android:layout_width">25dip</item>
+        <item name="android:layout_height">25dip</item>
+        <item name="android:background">@drawable/title_btn_refresh_normal</item>
+    </style>
+
+    <style name="MyTitleBar">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">42dip</item>
+        <item name="android:background">@drawable/titlebar_bg</item>
+    </style>
+
+    <style name="MyBackButton">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:paddingLeft">2dip</item>
+        <item name="android:paddingRight">2dip</item>
+        <item name="android:paddingTop">6dip</item>
+        <item name="android:paddingBottom">6dip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/btn_back_bg</item>
+        <item name="android:layout_width">25dip</item>
+        <item name="android:layout_height">25dip</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="MyTitleText">
+        <item name="android:layout_width">160dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textSize">20dip</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="NormalText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="VerticalDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/line_blue</item>
+    </style>
+
+    <style name="VerticalDivider.Dialog">
+        <item name="android:background">?android:attr/listDividerAlertDialog</item>
+        <item name="android:layout_height">0.8dp</item>
+    </style>
+
+    <style name="VerticalDivider.Thin">
+        <item name="android:layout_height">0.8dp</item>
+    </style>
+
+    <style name="HorizontalDivider">
+        <item name="android:layout_width">0.8dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/line_blue</item>
+    </style>
+
+    <!-- List Styles -->
+    <style name="Cell">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textColor">@color/lightblack</item>
+        <item name="android:textIsSelectable">false</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Cell.RightAlign">
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="FilterInfo">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textColor">@color/text_blue</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="FilterInfo.RightAlign">
+        <item name="android:gravity">right</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+
+    <style name="ItemDetail">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="CustomTabStyle" parent="@android:style/Widget.Holo.ActionBar.TabBar">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/state_tab_bg</item>
+    </style>
+
+    <style name="CustomTabBar" parent="@android:style/Widget.Holo">
+        <item name="android:divider">@color/divider_blue</item>
+        <item name="android:showDividers">middle</item>
+         <item name="android:dividerPadding">12dp</item>
+    </style>
+
+    <style name="CustomTabTheme" parent="@style/AppTheme">
+        <item name="android:actionBarTabBarStyle">@style/CustomTabBar</item>
+    </style>
+
+</resources>

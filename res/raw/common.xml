@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><common>
+	<fileCacheDays>2</fileCacheDays>		<!-- days for file to be cached -->
+	<socketHost>121.196.132.162</socketHost>		<!-- default socket host ip -->
+	<socketHostPort>30000</socketHostPort>		<!-- default socket host ip port -->
+	<listImageSuffix>_80x80.jpg</listImageSuffix>		<!-- taobao image pixel configure -->
+	<itemImageSuffix>_200x200.jpg</itemImageSuffix>
+	<bigImageSuffix>_400x400.jpg</bigImageSuffix>
+	
+	<channelID>2</channelID>	<!-- !!!!!!!!!!!!! -->
+	<clientAgent>2</clientAgent>
+	<softver>1.0.2</softver>
+	<sellerNick>pypy79</sellerNick>
+	<appkey>21381792</appkey>
+	<secret>123456789</secret>
+	<callbackUrl>http://117.79.132.22/sellerclient/buyer/index.php</callbackUrl>
+	
+<!--<server_appkey>12567621</server_appkey> -->
+<!--<server_secret>d1fa5363416ed76781185c7f9aa266c3</server_secret> -->
+</common>

@@ -1,0 +1,221 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="true"
+    android:clipToPadding="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_bg"
+        android:orientation="vertical"
+        android:padding="16dp" >
+
+        <RelativeLayout
+            android:id="@+id/progress_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" >
+
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/basic_infomation" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/located_shop"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Spinner
+                    android:id="@+id/shop_sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/warehouse"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Spinner
+                    android:id="@+id/warehouse_sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/do_price"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Spinner
+                    android:id="@+id/price_sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal" >
+
+                <CheckBox
+                    android:id="@+id/not_record_customer_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/do_not_record_customer" />
+
+                <Button
+                    android:id="@+id/search_customer_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/search_customer_info"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <GridLayout
+                android:id="@+id/customer_info_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:visibility="gone" >
+
+                <TextView
+                    android:layout_gravity="right"
+                    android:text="@string/customer_name" />
+
+                <EditText
+                    android:id="@+id/customer_name_edit"
+                    android:layout_gravity="fill_horizontal"
+                    android:inputType="text" />
+
+                <TextView
+                    android:layout_gravity="right"
+                    android:text="@string/telephone" />
+
+                <EditText
+                    android:id="@+id/tel_edit"
+                    android:layout_gravity="fill_horizontal"
+                    android:inputType="number" />
+                
+                 <TextView android:layout_gravity="right"
+                    android:text="@string/nick_name"/>
+                 
+                 <EditText 
+                     android:id="@+id/nick_name_edit"
+                     android:layout_gravity="fill_horizontal"
+                     android:inputType="text"/>
+
+                <TextView
+                    android:layout_gravity="right"
+                    android:text="@string/zip_code" />
+
+                <EditText
+                    android:id="@+id/zip_code_edit"
+                    android:layout_gravity="fill_horizontal"
+                    android:inputType="number" />
+                
+               
+
+                <TextView
+                    android:layout_gravity="right|center_vertical"
+                    android:text="@string/to_district_address" />
+
+                <Button
+                    android:id="@+id/to_district_address_btn"
+                    android:ems="15"
+                    android:text="@string/click_to_select"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_gravity="right|center_vertical"
+                    android:text="@string/street_address" />
+
+                <EditText
+                    android:id="@+id/street_address_edit"
+                    android:layout_gravity="fill_horizontal"
+                    android:inputType="text" />
+
+                <TextView
+                    android:layout_gravity="right"
+                    android:text="@string/email" />
+
+                <EditText
+                    android:id="@+id/email_edit"
+                    android:layout_gravity="fill_horizontal"
+                    android:inputType="textEmailAddress" />
+            </GridLayout>
+
+            <Button
+                android:id="@+id/ok_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@android:string/ok" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

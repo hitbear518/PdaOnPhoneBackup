@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_filter"
+        android:showAsAction="ifRoom"
+        android:title="@string/filter"/>
+    <item
+        android:id="@+id/action_submit"
+        android:showAsAction="ifRoom"
+        android:title="@string/submit_pd"/>
+    
+    <item 
+        android:id="@+id/action_update_pdd"
+        android:showAsAction="never"
+        android:title="@string/update_pdd"/>
+
+</menu>

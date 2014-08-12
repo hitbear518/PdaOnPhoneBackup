@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/set_default_shop_action"
+        android:showAsAction="always"
+        android:title="@string/default_shop"/>
+    <item
+        android:id="@+id/set_default_price_action"
+        android:showAsAction="always"
+        android:title="@string/default_price"/>
+
+</menu>

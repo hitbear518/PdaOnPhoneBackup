@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  file store module configuration -->
+
+<httpConfig>
+	<server>
+<!-- 	<address>www.miuu.cn/api</address> -->
+<!-- 	<address>api.jiayuan.com</address> -->
+		<address>pda.wangdian.cn/api</address>
+		<port>80</port>
+		<basicPath></basicPath>	<!-- like:'api.jiayuan.com/service/api/email.php', here 'service/api' could be basic path -->
+	</server>
+    <locationBasedServer>
+<!--	<address>api.miuu.cn</address> -->
+    	<address>api2.jiayuan.com</address>
+		<port>80</port>
+		<basicPath>geo</basicPath>	<!-- like:'api.jiayuan.com/service/api/email.php', here 'service/api' could be basic path -->
+    </locationBasedServer>
+    <imageServer>
+    	<address>watermark.jiayuan.com</address>
+		<port>80</port>
+		<basicPath></basicPath>	<!-- like:'api.jiayuan.com/service/api/email.php', here 'service/api' could be basic path -->
+    </imageServer>
+</httpConfig>

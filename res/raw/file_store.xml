@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  file store module configuration -->
+
+<fileStore>
+	<storePath>datareport/fileStore</storePath> <!-- the full store path on SD card. Only when storePlace is 'outer'-->
+</fileStore>
