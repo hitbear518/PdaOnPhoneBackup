@@ -162,7 +162,7 @@
         </activity>
         <activity android:name="com.zsxj.pda.ui.client.CashSaleGoodsListActivity"></activity>
         <activity android:name="com.zsxj.pda.ui.client.CashSaleGoodsActivity"></activity>
-        <activity android:name="com.zsxj.pda.ui.client.CashSaleSumitActivity"></activity>
+        <activity android:name="com.zsxj.pda.ui.client.CashSaleSubmitActivity"></activity>
         <activity android:name="com.zsxj.pda.ui.client.SearchCustomerActivity"></activity>
         <activity android:name="com.zsxj.pda.ui.client.AddressSelectActivity"></activity>
 

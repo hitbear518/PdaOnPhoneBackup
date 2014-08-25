@@ -162,7 +162,7 @@ public class CashSaleGoodsListActivity extends ListActivity {
 			finish();
 			break;
 		case R.id.search_action:
-			ViewUtils.showSearchDialog(this);
+			ViewUtils.showSearchDialog(this, ScanType.TYPE_CASH_SALE_BY_TERM);
 			break;
 		case R.id.submit_action:
 			startSubmit();
@@ -252,7 +252,7 @@ public class CashSaleGoodsListActivity extends ListActivity {
 			Util.toast(getApplicationContext(), "没有可提交的条目");
 			return;
 		}
-		Intent intent = new Intent(this, CashSaleSumitActivity.class);
+		Intent intent = new Intent(this, CashSaleSubmitActivity.class);
 		intent.putExtra(Extras.NO_DISCOUNT_TOTAL, mNoDiscountTotal);
 		intent.putExtra(Extras.DISCOUNT_TOTAL, mDiscountTotal);
 		startActivity(intent);

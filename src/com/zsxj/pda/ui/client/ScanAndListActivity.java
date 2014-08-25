@@ -198,7 +198,7 @@ public class ScanAndListActivity extends Activity implements QueryCallBack {
 			finish();
 			break;
 		case R.id.search_action:
-			ViewUtils.showSearchDialog(this, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			ViewUtils.showSearchDialog(this, Intent.FLAG_ACTIVITY_CLEAR_TOP, mScanType);
 			break;
 		default:
 			break;
@@ -285,8 +285,7 @@ public class ScanAndListActivity extends Activity implements QueryCallBack {
 				break;
 			case ScanType.TYPE_FAST_PD:
 			case ScanType.TYPE_QUERY_SPECS:
-				WDTQuery.getinstance().querySpecs(this, this, 
-						Globals.getWarehouseId(getApplicationContext()), mBarcode);
+				WDTQuery.getinstance().querySpecsByTerm(this, Globals.getWarehouseId(this), mSearchTerm);
 				break;
 			case ScanType.TYPE_FAST_IN_EXAMINE_GOODS:
 				WDTQuery.getinstance().queryInExamSpecs(this, this, mBarcode);

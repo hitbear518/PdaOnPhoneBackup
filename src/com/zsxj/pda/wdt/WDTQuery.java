@@ -67,7 +67,8 @@ public class WDTQuery {
 	private native byte[] preGetCustomers(String tel);
 	private native Customer[] getCustomers(byte[] buf);
 	private native byte[] preGetCashSaleSpecsByTerm(int warehouseId, String searchTerm);
-	
+	private native byte[] preGetSpecsByTerm(int warehouseId, String searchTerm);
+
 	private static int TYPE_WAREHOUSES = 0;
 	private static int TYPE_PD_ENTRIES = 1;
 	private static int TYPE_SPECS = 2;
@@ -91,6 +92,7 @@ public class WDTQuery {
 	private static int TYPE_CASH_SALE_SPEC_STOCK = 20;
 	private static int TYPE_CUSTOMER = 21;
 	private static int TYPE_CASH_SALE_SPECS_BY_TERM = 22;
+	private static int TYPE_SPECS_BY_TERM = 23;
  	
 	protected static WDTQuery instance = null;
 	
@@ -313,6 +315,15 @@ public class WDTQuery {
 		new Thread(new QueryRunnable(params, callBack)).start();
 	}
 	
+	public void querySpecsByTerm(QueryCallBack callback, int warehouseId, String searchTerm) {
+		Params params = new Params();
+		params.type = TYPE_SPECS_BY_TERM;
+		params.warehouseId = warehouseId;
+		params.searchTerm = searchTerm;
+		
+		new Thread(new QueryRunnable(params, callback)).start();
+	}
+	
 	public class QueryRunnable implements Runnable {
 
 		private Params mParams;
@@ -387,6 +398,8 @@ public class WDTQuery {
 					bytes1 = preGetCustomers(mParams.tel);
 				} else if (TYPE_CASH_SALE_SPECS_BY_TERM == mParams.type) {
 					bytes1 = preGetCashSaleSpecsByTerm(mParams.warehouseId, mParams.searchTerm);
+				} else if (TYPE_SPECS_BY_TERM == mParams.type) {
+					bytes1 = preGetSpecsByTerm(mParams.warehouseId, mParams.searchTerm);
 				}
 				
 				// Send
@@ -408,7 +421,7 @@ public class WDTQuery {
 					result = getWarehouses(recvBuf);
 				} else if (TYPE_PD_ENTRIES == mParams.type) {
 					result = getPdEntries(recvBuf);
-				} else if (TYPE_SPECS == mParams.type) {
+				} else if (TYPE_SPECS == mParams.type || TYPE_SPECS_BY_TERM == mParams.type) {
 					result = getSpecs(recvBuf);
 				} else if (TYPE_POSITION_COUNT == mParams.type) {
 					int count = getPositionCount(recvBuf);

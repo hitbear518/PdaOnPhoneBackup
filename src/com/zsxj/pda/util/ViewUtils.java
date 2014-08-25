@@ -11,15 +11,14 @@ import android.widget.FrameLayout;
 
 import com.zsxj.pda.ui.client.ScanAndListActivity;
 import com.zsxj.pda.util.ConstParams.Extras;
-import com.zsxj.pda.util.ConstParams.ScanType;
 
 public class ViewUtils {
 
-	public static void showSearchDialog(final Context context) {
-		showSearchDialog(context, 0);
+	public static void showSearchDialog(final Context context, int scanType) {
+		showSearchDialog(context, 0, scanType);
 	}
 	
-	public static void showSearchDialog(final Context context, final int flags) {
+	public static void showSearchDialog(final Context context, final int flags, final int scanType) {
 		final EditText searchTermEdit = new EditText(context);
 		searchTermEdit.setHint("货品名称、货品编号或商家编码");
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
@@ -37,7 +36,7 @@ public class ViewUtils {
 					
 					if (TextUtils.isEmpty(searchTerm)) return;
 					
-					search(context, searchTerm, flags);
+					search(context, searchTerm, flags, scanType);
 				}
 			})
 			.create();
@@ -45,10 +44,10 @@ public class ViewUtils {
 		dialog.show();
 	}
 	
-	private static void search(Context context, String searchTerm, int flags) {
+	private static void search(Context context, String searchTerm, int flags, int scanType) {
 		Intent intent = new Intent(context, ScanAndListActivity.class);
 		intent.setFlags(flags);
-		intent.putExtra(Extras.SCAN_TYPE, ScanType.TYPE_CASH_SALE_BY_TERM);
+		intent.putExtra(Extras.SCAN_TYPE, scanType);
 		intent.putExtra(Extras.SEARCH_TERM, searchTerm);
 		context.startActivity(intent);
 	}

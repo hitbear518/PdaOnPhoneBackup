@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/warehouse_ctv"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/section_bg_0"
     android:checkMark="?android:attr/listChoiceIndicatorSingle"

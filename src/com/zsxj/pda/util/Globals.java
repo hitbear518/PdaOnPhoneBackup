@@ -154,11 +154,11 @@ public class Globals {
 			return new int[] {
 				0, 1, 2, 3, 4, 99
 			};
-		} else if (sellerNick.equals("haoxu") || sellerNick.equals("qiqu")) {
+		} else if (sellerNick.equals("haoxu") || sellerNick.equals("qiqu") || sellerNick.equals("duoduotest")) {
 			return new int[] {
 				0, 1, 2, 3, 4, 5, 99
 			};
-		} else if (sellerNick.equals("demo") || sellerNick.equals("duoduotest") || sellerNick.equals("joyvio") || sellerNick.equals("jiulong")) {
+		} else if (sellerNick.equals("demo") || sellerNick.equals("joyvio") || sellerNick.equals("jiulong")) {
 			return new int[] {
 				5, 99
 			};

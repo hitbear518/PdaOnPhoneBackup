@@ -328,6 +328,7 @@ public class ConstParams {
 		public static final String ITEM_LIST = "ItemList";
 		public static final String BUYER_EMAIL = "BuyerEmaill";
 		public static final String FAVOURABLE_TOTAL = "FavourableTotal";
+		public static final String LOGISTICS_CODE = "LogisticsCode";
 		public static final String REMARK = "Remark";
 		
 		// 二级结点

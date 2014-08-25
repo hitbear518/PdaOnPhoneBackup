@@ -27,6 +27,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -36,19 +39,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.zsxj.pda.provider.ProviderContract.CashSaleGoods;
 import com.zsxj.pda.util.ConstParams.Extras;
+import com.zsxj.pda.util.ConstParams.HandlerCases;
 import com.zsxj.pda.util.ConstParams.Interface;
 import com.zsxj.pda.util.Globals;
 import com.zsxj.pda.util.Util;
 import com.zsxj.pda.wdt.Customer;
+import com.zsxj.pda.wdt.Logistics;
+import com.zsxj.pda.wdt.WDTException;
+import com.zsxj.pda.wdt.WDTQuery;
+import com.zsxj.pda.wdt.WDTQuery.QueryCallBack;
 import com.zsxj.pdaonphone.R;
 
-public class CashSaleSumitActivity extends Activity {
+public class CashSaleSubmitActivity extends Activity implements QueryCallBack{
+	
+	private static final String TAG = CashSaleSubmitActivity.class.getSimpleName();
 	
 	private TextView mNoDiscountTotalTv;
 	private TextView mDiscountTotalTv;
@@ -58,6 +70,8 @@ public class CashSaleSumitActivity extends Activity {
 	private TextView mChangeMoneyTv;
 	private EditText mRemarkEdit;
 	private Button mOkBtn;
+	private Spinner mLogisticSpinner;
+	private EditText mLogisticsFeeEdit;
 	
 	private ProgressDialog mProgressDialog;
 
@@ -65,9 +79,40 @@ public class CashSaleSumitActivity extends Activity {
 	private double mDiscountTotal;
 	private double mExtraDiscount;
 	private double mAllShouldPay;
+	private double mLogisticsFee;
+	private Logistics[] mLogistics;
 	
 	private String mContent;
 	private String mSign;
+	
+	private Handler mHandler = new Handler(new Callback() {
+		
+		@Override
+		public boolean handleMessage(Message msg) {
+			mProgressDialog.dismiss();
+			switch (msg.what) {
+			case HandlerCases.NO_CONN:
+				Util.toast(getApplicationContext(), R.string.no_conn);
+				break;
+			case HandlerCases.PREPARE_QUERY_ERROR:
+				Log.e(TAG, getString(R.string.prepare_query_error));
+				Util.toast(getApplicationContext(), R.string.query_logistics_fail);
+				break;
+			case HandlerCases.QUERY_FAIL:
+				Util.toast(getApplicationContext(), R.string.query_logistics_fail);
+				break;
+			case HandlerCases.EMPTY_RESULT:
+				Util.toast(getApplicationContext(), R.string.query_logistics_fail);
+				break;
+			case HandlerCases.QUERY_SUCCESS:
+				onQueryLogisticsSuccess();
+				break;
+			default:
+				break;
+			}
+			return false;
+		}
+	});
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +147,8 @@ public class CashSaleSumitActivity extends Activity {
 		mChangeMoneyTv = (TextView) findViewById(R.id.change_money_tv);
 		mRemarkEdit = (EditText) findViewById(R.id.remark_edit);
 		mOkBtn = (Button) findViewById(R.id.ok_btn);
+		mLogisticSpinner = (Spinner) findViewById(R.id.logistic_spinner);
+		mLogisticsFeeEdit = (EditText) findViewById(R.id.logstics_fee_edit);
 		
 		mNoDiscountTotal = getIntent().getDoubleExtra(Extras.NO_DISCOUNT_TOTAL, -1);
 		mNoDiscountTotalTv.setText(String.format("%.2f", mNoDiscountTotal));
@@ -113,6 +160,25 @@ public class CashSaleSumitActivity extends Activity {
 		mAllShouldPayTv.setText(String.format("%.2f", mAllShouldPay));
 
 		mChangeMoneyTv.setText(String.format("%.2f", 0 - mAllShouldPay));
+		
+		mLogisticsFeeEdit.setText("0");
+		mLogisticsFeeEdit.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				countPayAndChange();
+			}
+		});
+		
 		mExtraDiscountEdit.setText("0");
 		mExtraDiscountEdit.addTextChangedListener(new TextWatcher() {
 			
@@ -157,12 +223,22 @@ public class CashSaleSumitActivity extends Activity {
 			}
 		});
 		
+		mLogistics = new Logistics[1];
+		mLogistics[0] = new Logistics(-1, "无", "");
+		
+		ArrayAdapter<Logistics> adapter = new ArrayAdapter<Logistics>(this, android.R.layout.simple_spinner_dropdown_item, mLogistics);
+		mLogisticSpinner.setAdapter(adapter);
+		
 		// Init progress dialog
 		mProgressDialog = new ProgressDialog(this);
 		mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		mProgressDialog.setTitle(R.string.please_wait);
 		mProgressDialog.setMessage(getString(R.string.submit) + "...");
 		mProgressDialog.setCancelable(false);
+		
+		WDTQuery.getinstance().queryLogistics(this, this);
+		
+		mProgressDialog.show();
 	}
 	
 	@Override
@@ -197,18 +273,27 @@ public class CashSaleSumitActivity extends Activity {
 	}
 	
 	private void countPayAndChange() {
+		String logisticsFeeStr = mLogisticsFeeEdit.getText().toString();
+		if (TextUtils.isEmpty(logisticsFeeStr) || logisticsFeeStr.equals(".")) {
+			mLogisticsFee = 0d;
+		} else {
+			mLogisticsFee = Double.parseDouble(logisticsFeeStr);
+		}
+		
 		String extraDiscountStr = mExtraDiscountEdit.getText().toString();
 		if (TextUtils.isEmpty(extraDiscountStr) || extraDiscountStr.equals("."))
 			mExtraDiscount = 0d;
 		else 
 			mExtraDiscount = Double.parseDouble(extraDiscountStr);
+		
 		String cashFeeStr = mCashFeeEdit.getText().toString();
 		double cashFee;
 		if (TextUtils.isEmpty(cashFeeStr) || cashFeeStr.equals("."))
 			cashFee = 0d;
 		else
 			cashFee = Double.parseDouble(cashFeeStr);
-		mAllShouldPay = mNoDiscountTotal - mDiscountTotal - mExtraDiscount;
+		
+		mAllShouldPay = mNoDiscountTotal - mDiscountTotal + mLogisticsFee - mExtraDiscount;
 		mAllShouldPayTv.setText(String.format("%.2f", mAllShouldPay));
 		mChangeMoneyTv.setText(String.format("%.2f", cashFee - mAllShouldPay));
 	}
@@ -349,11 +434,13 @@ public class CashSaleSumitActivity extends Activity {
 			content.put(Interface.GOODS_TOTAL, mNoDiscountTotal);
 			content.put(Interface.COD_FLAG, 0);// 非货到付款
 			content.put(Interface.ORDER_PAY, mAllShouldPay);
-			content.put(Interface.LOGISTICS_PAY, 0);
+			content.put(Interface.LOGISTICS_PAY, mLogisticsFee);
 			content.put(Interface.REG_OPERATOR_NO, Globals.getUserNo());
 			content.put(Interface.SHOP_NAME, Globals.getShopName());
 			content.put(Interface.FAVOURABLE_TOTAL, mDiscountTotal + mExtraDiscount);
 			content.put(Interface.REMARK, mRemarkEdit.getText().toString());
+			int whichLogistics = mLogisticSpinner.getSelectedItemPosition();
+			content.put(Interface.LOGISTICS_CODE, mLogistics[whichLogistics].logisticCode);
 			
 			Customer customer = Globals.getCustomer();
 			if (customer == null) {
@@ -453,5 +540,50 @@ public class CashSaleSumitActivity extends Activity {
 		}
 		
 		return content.toString();
+	}
+	
+	private void castQueryResult(Object qr) {
+		Logistics[] logistics = (Logistics[]) qr;
+		mLogistics = new Logistics[logistics.length + 1];
+		mLogistics[0] = new Logistics(-1, "无", "");
+		for (int i = 0; i < logistics.length; i++) {
+			mLogistics[i + 1] = logistics[i];
+		}
+	}
+
+	private void onQueryLogisticsSuccess() {
+		ArrayAdapter<Logistics> adapter = new ArrayAdapter<Logistics>(this, android.R.layout.simple_spinner_dropdown_item, mLogistics);
+		mLogisticSpinner.setAdapter(adapter);
+	}
+	
+	@Override
+	public void onQuerySuccess(Object qr) {
+		if (qr == null) {
+			mHandler.sendEmptyMessage(HandlerCases.EMPTY_RESULT);
+			return;
+		}
+		
+		if (Logistics[].class.isInstance(qr)) {
+			castQueryResult(qr);
+			mHandler.sendEmptyMessage(HandlerCases.QUERY_SUCCESS);
+		} else {
+			throw new ClassCastException("Fail to cast to Logistic[]");
+		}
+	}
+
+	@Override
+	public void onQueryFail(int type, WDTException wdtEx) {
+		if (null == wdtEx) {
+			mHandler.sendEmptyMessage(type);
+			return;
+		}
+		
+		switch (wdtEx.getStatus()) {
+		case 1064:
+			mHandler.sendEmptyMessage(HandlerCases.QUERY_FAIL);
+			break;
+		default:
+			break;
+		}
 	}
 }

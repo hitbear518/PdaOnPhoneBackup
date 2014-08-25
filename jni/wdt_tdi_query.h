@@ -75,6 +75,7 @@ extern jbyteArray preGetCustomers(JNIEnv *env, jobject thiz, jstring tel);
 extern jobjectArray getCustomers(JNIEnv *env, jobject thiz, jbyteArray jbytes);
 
 extern jbyteArray preGetCashSaleSpecsByTerm(JNIEnv *env, jobject thiz, jint warehouseId, jstring jsearchTerm);
+extern jbyteArray preGetSpecsByTerm(JNIEnv *env, jobject thiz, jint warehouseId, jstring jSearchTerm);
 
 #ifdef __cplusplus
 }

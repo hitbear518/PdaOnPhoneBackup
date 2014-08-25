@@ -130,7 +130,8 @@ JNINativeMethod g_queryMethodTable[] =
 	{"preGetCustomers", "(Ljava/lang/String;)[B", (void *) preGetCustomers},
 
 	{"getCustomers", "([B)[Lcom/zsxj/pda/wdt/Customer;", (void *) getCustomers},
-	{"preGetCashSaleSpecsByTerm", "(ILjava/lang/String;)[B", (void *) preGetCashSaleSpecsByTerm}
+	{"preGetCashSaleSpecsByTerm", "(ILjava/lang/String;)[B", (void *) preGetCashSaleSpecsByTerm},
+	{"preGetSpecsByTerm", "(ILjava/lang/String;)[B", (void *) preGetSpecsByTerm}
 };
 
 JNINativeMethod g_updateMethodTable[] =
@@ -261,7 +262,7 @@ void cacheLogistics(JNIEnv *env)
 	g_logisticsCache.cls = reinterpret_cast<jclass>(env->NewGlobalRef(logisticsCls));
 	CHECK_NULL(g_logisticsCache.cls);
 	g_logisticsCache.initId =
-		env->GetMethodID(logisticsCls, "<init>", "(ILjava/lang/String;)V");
+		env->GetMethodID(logisticsCls, "<init>", "(ILjava/lang/String;Ljava/lang/String;)V");
 	CHECK_NULL(g_logisticsCache.initId);
 }
 
@@ -380,7 +381,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
 
 	jclass queryCls = env->FindClass(g_wdtQueryPath);
 	CHECK_NULL(queryCls);
-	returnValue = env->RegisterNatives(queryCls, g_queryMethodTable, 42);
+	returnValue = env->RegisterNatives(queryCls, g_queryMethodTable, 43);
 	if (returnValue < 0)
 	{
 		env->Throw(env->ExceptionOccurred());

@@ -248,6 +248,8 @@
     
     <!-- CashSaleSubmit -->
     <string name="remark">备注：</string>
+    <string name="logistic_company">物流公司：</string>
+    <string name="logistics_fee">邮费：</string>
     
     <!-- SearchCustomerActivity -->
     <string name="enter_search_term">关键字(网名、姓名、电话)</string>
@@ -255,4 +257,5 @@
     
     <!-- SearchGoodsActivity -->
     <string name="enter_search_term_goods">输入货品名称或编号</string>
+    
 </resources>

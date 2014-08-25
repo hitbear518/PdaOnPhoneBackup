@@ -1726,7 +1726,7 @@ jbyteArray preGetLogistics(JNIEnv *env, jobject thiz)
 	// 查询
 	tdi_prot_st_prepare(g_tdi);
 
-	const char *sql = "SELECT LogisticID, LogisticName \
+	const char *sql = "SELECT LogisticID, LogisticName, LogisticCode \
 			FROM g_cfg_logisticlist Where bBlockUp=0  \
 			ORDER BY LogisticID ASC";
 	status = tdi_prot_st_execute(g_tdi, sql);
@@ -1780,6 +1780,7 @@ jobjectArray getLogistics(JNIEnv *env, jobject thiz, jbyteArray jbytes)
 	{
 		jint logisticId;
 		jstring logisticName;
+		jstring logisticCode;
 		const char *str;
 		const char *colName;
 
@@ -1809,9 +1810,11 @@ jobjectArray getLogistics(JNIEnv *env, jobject thiz, jbyteArray jbytes)
 		logisticName = env->NewStringUTF(str);
 		CHECK_NULL(logisticName);
 
+		logisticCode = getStrData(env, row, 2);
+
 		jobject logstics = env->NewObject(
 			g_logisticsCache.cls, g_logisticsCache.initId,
-			logisticId, logisticName);
+			logisticId, logisticName, logisticCode);
 		CHECK_NULL(logstics);
 		env->SetObjectArrayElement(logisticsArr, row, logstics);
 		CHECK_EXCEPTION(env->ExceptionOccurred());
@@ -2666,7 +2669,7 @@ jbyteArray preGetCashSaleSpecsByTerm(JNIEnv *env, jobject thiz, jint warehouseId
 
 	const char *select = "SELECT ggs.SpecID, ggs.SpecBarcode, ggl.GoodsNo, ggl.goodsName, ggs.SpecCode, ggs.SpecName, ggs.SPecPriceDetail, ggs.SpecPriceWholesale, ggs.SpecPriceMember, ggs.SpecPricePurchase, ggs.SpecPrice1, ggs.SpecPrice2, ggs.SpecPrice3, ss.Stock-ss.OrderCount-ss.SndCount, ss.WarehouseID";
 	const char *from = "FROM g_stock_spec ss LEFT JOIN g_goods_goodsspec ggs USING(SpecID) LEFT JOIN g_goods_goodslist ggl USING(GoodsID)";
-	const char *where = "WHERE ss.WarehouseID=%d AND ggl.bBlockUp=0 AND ggs.bBlockUp=0 AND (ggl.goodsName LIKE '%%%s%%' OR ggl.GoodsNo LIKE '%%%s%%' OR ggs.SpecBarcode LIKE '%%%s%%')";
+	const char *where = "WHERE ggl.bFit=0 AND ss.WarehouseID=%d AND ggl.bBlockUp=0 AND ggs.bBlockUp=0 AND (ggl.goodsName LIKE '%%%s%%' OR ggl.GoodsNo LIKE '%%%s%%' OR ggs.SpecBarcode LIKE '%%%s%%')";
 	const char *orderByLimit = "ORDER BY SpecID LIMIT 20";
 
 	char temp[strlen(select) + strlen(from) + strlen(where) + strlen(orderByLimit) + 10];
@@ -2685,4 +2688,32 @@ jbyteArray preGetCashSaleSpecsByTerm(JNIEnv *env, jobject thiz, jint warehouseId
 	}
 
 	return transTdiTojbArr(env);
+}
+
+jbyteArray preGetSpecsByTerm(JNIEnv *env, jobject thiz, jint warehouseId, jstring jSearchTerm) {
+		int status;
+
+		// 查询
+		tdi_prot_st_prepare(g_tdi);
+
+		const char *select = "SELECT ggs.SpecId, ggl.GoodsNo, ggl.GoodsName, ggs.SpecCode, ggs.SpecName, ggs.SpecBarcode, sp.PositionsId, cpl.PositionsName, sp.Stock";
+		const char *fromLeftJoin1 = "FROM g_goods_goodsspec ggs LEFT JOIN g_goods_goodslist ggl ON ggs.GoodsId=ggl.GoodsId";
+		const char *leftJoin23 = "LEFT JOIN g_stock_positions sp ON ggs.SpecId=sp.SpecId LEFT JOIN g_cfg_positionslist cpl ON sp.PositionsId=cpl.PositionsId";
+		const char *whereOrderBy = "WHERE ggs.bBlockUp=0 AND ggl.bBlockUp=0 AND ggl.bFit=0 AND sp.WarehouseId=%d AND (ggl.goodsName LIKE '%%%s%%' OR ggl.GoodsNo LIKE '%%%s%%' OR ggs.SpecBarcode LIKE '%%%s%%') ORDER BY sp.Stock DESC";
+
+		char temp[strlen(select) + strlen(fromLeftJoin1) + strlen(leftJoin23) + strlen(whereOrderBy) + 10];
+		sprintf(temp, "%s %s %s %s", select, fromLeftJoin1, leftJoin23, whereOrderBy);
+		char sql[strlen(temp) + 60];
+		const char *searchTerm = env->GetStringUTFChars(jSearchTerm, NULL);
+		sprintf(sql, temp, warehouseId, searchTerm, searchTerm, searchTerm);
+		status = tdi_prot_st_execute(g_tdi, sql);
+		printf("%s", sql);
+		printf("-------------------------------PRE get SPECS by TERM status = %d", status);
+		CHECK_STATUS(status);
+		if (status) {
+			throwEx(env, status, tdi_prot_data(g_tdi));
+			return NULL;
+		}
+
+		return transTdiTojbArr(env);
 }
